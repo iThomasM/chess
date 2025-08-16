@@ -49,6 +49,9 @@ class Game:
         for move in getattr(self, 'legal_moves', []):
             x, y = move
             pygame.draw.rect(self.screen, (0, 200, 0,), pygame.Rect(x * self.tile_size, y * self.tile_size, self.tile_size, self.tile_size))
+        
+        if self.selected_tile:
+            pygame.draw.rect(self.screen, (0, 0, 200,), pygame.Rect(self.selected_tile[0] * self.tile_size, self.selected_tile[1] * self.tile_size, self.tile_size, self.tile_size))
 
     def _draw_pieces(self):
         for i in range(self.board_size):
@@ -129,7 +132,6 @@ class Game:
                     moves.append((new_col, new_row))
 
         return moves
-
 
     def get_pawn_moves(self, row, col, color):
         moves = []
